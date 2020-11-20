@@ -12,6 +12,7 @@ class ViewController: UIViewController, KeyboardUpDownProtocol {
     let textVMinY: CGFloat = 500  //orignal
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Just keyboard"
         textV = UITextView(frame: CGRect(x: (UIScreen.main.bounds.width - 300)/2, y: textVMinY, width: 300, height: 150))
         textV.layer.borderWidth = 1.0
         textV.layer.borderColor = UIColor.gray.cgColor
@@ -19,10 +20,20 @@ class ViewController: UIViewController, KeyboardUpDownProtocol {
         addNoticeForKeyboard()
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapAction(tap:)))
         self.view.addGestureRecognizer(tap)
+        
+        let btn = UIButton(frame: CGRect(x: 100, y: UI.navigationBarMaxY + 50, width: 170, height: 100))
+        btn.setTitle("gotoFormVC", for: .normal)
+        btn.backgroundColor = UIColor.brown
+        self.view.addSubview(btn)
+        btn.addTarget(self, action: #selector(goToFormAction(_:)), for: .touchUpInside)
     }
     
     deinit {
         removeNotice()
+    }
+    
+    @objc func goToFormAction(_ sender: Any) {
+        self.navigationController?.pushViewController(PersonInfoVC(), animated: true)
     }
     
     @objc func tapAction(tap :UITapGestureRecognizer) {
@@ -77,23 +88,5 @@ class ViewController: UIViewController, KeyboardUpDownProtocol {
     }
 }
 
-struct UI {
-   static let beautifulSpace: CGFloat = 13.0
-   static var keyboardHeight: CGFloat {
-        switch UIScreen.main.bounds.size.height {
-        case 885 ... 1000 :
-                return 346
-        case 811 ..< 885 :
-            return 336
-        case 735 ..< 811:
-            return 271
-        case 666 ..< 735:
-            return 260
-        case 567 ..< 666:
-            return 253
-        default:
-            return 253
-        }
-    }
-}
+
 

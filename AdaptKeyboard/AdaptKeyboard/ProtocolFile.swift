@@ -25,3 +25,19 @@ protocol KeyboardUpDownProtocol {
     /// - Parameter sender: active input item
     func hiddenKeyboard(sender: UIView)
 }
+
+protocol FormTableVCProtocol {
+    
+    /// 用户开始输入信息
+    func inputString()
+    
+    /// 用户开始选择信息
+    func selectItem()
+    
+    /// 赋值操作
+    /// - Parameters:
+    ///   - newValue: newValue description
+    ///   - forIndexpath: forIndexpath description
+    func configureModel(newValue: String?, forIndexpath: IndexPath)
+}
+ 
